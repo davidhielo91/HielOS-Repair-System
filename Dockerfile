@@ -4,13 +4,16 @@ FROM node:18-alpine AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY prisma ./prisma/
 RUN npm ci
+RUN npx prisma generate
 
 # Build the application
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN npx prisma generate
 RUN npm run build
 
 # Production image
@@ -24,6 +27,7 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/prisma ./prisma/
 
 # Create data directory with proper permissions
 RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
