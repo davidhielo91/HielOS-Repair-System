@@ -34,76 +34,100 @@ Sistema profesional para talleres de reparación con **innovador portal de clien
 - **Personalización**: Logo, colores, horarios, plantillas
 - **Multi-dispositivo**: Responsive 100% para móviles y escritorio
 
-### ⚡ Rendimiento y UX
-- **Velocidad nativa**: Optimizado con Next.js y base de datos relacional para respuestas instantáneas
-- **Menos polling**: Menor carga en notificaciones sin perder seguimiento
-- **Ajustes móviles**: Mejoras de layout y espaciado en vistas críticas (admin y portal cliente)
-
-## 🚀 Demo Rápido
-
-### Flujo del Portal Cliente
-1. Cliente busca su orden en tu web pública
-2. Ingresa teléfono (mínimo 4 dígitos) + número de orden
-3. Accede a portal personalizado con:
-   - Fotos del equipo
-   - Historial de estados
-   - Presupuesto pendiente (si aplica)
-   - Diagnóstico detallado
-   - Botones de Aprobar/Rechazar
-   - Firma digital requerida para aprobar
-4. Al responder, el taller recibe notificación en el panel admin
-
-### Flujo del Administrador
-1. Crea orden → diagnostica → agrega servicios/costos
-2. Haz clic en **"Enviar Presupuesto"**
-3. Cliente recibe WhatsApp con enlace al portal
-4. Cliente aprueba/rechaza desde su celular (con firma en aprobación)
-5. Tú ves el resultado en el panel admin + campana de notificaciones
-
 ## 📋 Requisitos
 
 - [Node.js](https://nodejs.org) v18 o superior
 - Navegador web moderno
 
-## ⚙️ Instalación
+## ⚙️ Instalación Local (Desarrollo)
 
-1. **Clona el repositorio**:
+### 1. Clona el repositorio
 ```bash
 git clone https://github.com/davidhielo91/sistema-de-taller.git
 cd sistema-de-taller
 ```
 
-2. **Instala dependencias**:
+### 2. Instala dependencias
 ```bash
 npm install
 ```
 
-3. **Configura variables de entorno** (opcional):
+### 3. Genera el cliente de Prisma
 ```bash
-cp .env.local.example .env.local
+npx prisma generate
 ```
 
-4. **Inicia en modo desarrollo**:
+### 4. Inicializa la base de datos
+```bash
+npx prisma db push
+```
+
+### 5. Configura variables de entorno (opcional)
+```bash
+cp .env.local.example .env.local
+# Edita .env.local con tu contraseña preferida
+```
+
+### 6. Inicia en modo desarrollo
 ```bash
 npm run dev
 ```
 
-5. **Abre tu navegador** en **http://localhost:3000**
+### 7. Abre tu navegador
+Accede a **http://localhost:3000**
+
+## 🐳 Despliegue con Docker
+
+### Opción 1: Docker Compose (Recomendado)
+```bash
+# Un solo comando para todo:
+docker compose up -d
+
+# Ver logs:
+docker compose logs -f
+```
+
+### Opción 2: Docker manual
+```bash
+# Construir imagen
+docker build -t sistema-taller .
+
+# Correr contenedor
+docker run -d \
+  -p 3000:3000 \
+  -v taller-data:/app/data \
+  -e ADMIN_PASSWORD=tu_contraseña \
+  -e AUTH_SECRET=secreto-largo-aqui \
+  --name taller \
+  sistema-taller
+```
+
+## ☁️ Despliegue en Easypanel
+
+1. **Crea un servicio nuevo** → Selecciona **"App"** → **"GitHub"**
+2. **Conecta tu repo**: `davidhielo91/sistema-de-taller`
+3. **Branch**: `master`
+4. **Build method**: `Dockerfile` (ya incluido en el repo)
+5. **Configura el dominio**: Puerto **3000**
+6. **Variables de entorno** (en la pestaña Environment):
+   ```
+   ADMIN_PASSWORD=tu_contraseña_segura
+   AUTH_SECRET=un-secreto-largo-aqui
+   ```
+7. **Deploy** → ¡Listo! 🎉
+
+> **Nota**: La base de datos SQLite se guarda en `/app/data/`. Configura un volumen persistente en Easypanel para no perder datos al redeploy.
 
 ## 🔑 Acceso
 
 ### Panel de Administración
-- **URL**: `http://localhost:3000/admin`
+- **URL**: `http://tu-dominio/admin`
 - **Contraseña por defecto**: `admin123`
 
-Para cambiar la contraseña, edita `.env.local`:
-```env
-ADMIN_PASSWORD=tu_nueva_contraseña
-CLIENT_TOKEN_SECRET=secreto-para-tokens-clientes
-```
+Para cambiar la contraseña, configura la variable de entorno `ADMIN_PASSWORD`.
 
 ### Portal de Cliente
-- **URL**: `http://localhost:3000/orden/[NUMERO_ORDEN]`
+- **URL**: `http://tu-dominio/orden/[NUMERO_ORDEN]`
 - **Acceso**: Teléfono + número de orden (verificación automática)
 
 ## 🎯 Personalización
@@ -135,12 +159,6 @@ En **Admin → Configuración → Respaldo de Información**:
 - **Autenticación**: Tokens JWT con HMAC-SHA256
 - **Deployment**: Docker con `output: standalone`
 
-### Seguridad
-- **Tokens cliente**: Expiran en 24 horas
-- **Verificación telefónica**: Mínimo 4 dígitos + match por sufijo
-- **Middleware**: Rutas protegidas por roles
-- **Sin datos sensibles**: Portal no expone notas internas ni costos de piezas
-
 ### Estructura
 ```
 ├── src/
@@ -152,19 +170,11 @@ En **Admin → Configuración → Respaldo de Información**:
 │   ├── components/          # Componentes UI
 │   ├── lib/                # Lógica de negocio
 │   └── types/              # Tipos TypeScript
-├── data/                   # Base de datos SQLite y archivos locales
+├── prisma/                 # Schema de base de datos
+├── data/                   # Base de datos SQLite (se crea automático)
 ├── Dockerfile             # Configuración Docker
+├── docker-compose.yml     # Deploy con un comando
 └── next.config.js         # Configuración Next.js
-```
-
-## 🐳 Docker Deployment
-
-```bash
-# Construir imagen
-docker build -t sistema-taller .
-
-# Correr contenedor
-docker run -p 3000:3000 -v $(pwd)/data:/app/data sistema-taller
 ```
 
 ## 🌟 Novedades v2.0
@@ -175,7 +185,6 @@ docker run -p 3000:3000 -v $(pwd)/data:/app/data sistema-taller
 - 💰 **Aprobación de presupuestos online con firma digital**
 - 🔔 **Notificaciones al admin por aprobación/rechazo**
 - 🔔 **Integración mejorada con WhatsApp**
-- 🛡️ **Verificación telefónica mejorada**
 - 📊 **UI/UX optimizada para móviles**
 - ⚡ **Mejoras de rendimiento con SQLite y Prisma**
 

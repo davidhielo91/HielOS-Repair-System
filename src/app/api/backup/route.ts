@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createBackupZip } from "@/lib/backup";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     try {

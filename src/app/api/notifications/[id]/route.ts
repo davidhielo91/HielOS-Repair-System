@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { markAsRead, deleteNotification } from "@/lib/notifications";
 import { cookies } from "next/headers";
+export const dynamic = "force-dynamic";
 
 export async function PATCH(
   request: NextRequest,
@@ -9,13 +10,13 @@ export async function PATCH(
   try {
     const cookieStore = cookies();
     const adminSession = cookieStore.get("str_admin_session");
-    
+
     if (!adminSession) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
     const success = markAsRead(params.id);
-    
+
     if (!success) {
       return NextResponse.json({ error: "Notificación no encontrada" }, { status: 404 });
     }
@@ -33,13 +34,13 @@ export async function DELETE(
   try {
     const cookieStore = cookies();
     const adminSession = cookieStore.get("str_admin_session");
-    
+
     if (!adminSession) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
     const success = deleteNotification(params.id);
-    
+
     if (!success) {
       return NextResponse.json({ error: "Notificación no encontrada" }, { status: 404 });
     }

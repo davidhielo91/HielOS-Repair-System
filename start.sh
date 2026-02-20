@@ -1,11 +1,10 @@
 #!/bin/sh
 set -e
 
-echo "Running database migrations..."
-npx prisma migrate deploy --schema=./prisma/schema.prisma 2>/dev/null || \
-  npx prisma db push --schema=./prisma/schema.prisma --accept-data-loss 2>/dev/null || \
-  echo "Warning: Could not run migrations, database may already be up to date"
+echo "Initializing database..."
+npx prisma db push --schema=./prisma/schema.prisma --skip-generate 2>/dev/null || \
+  echo "Warning: Could not initialize database, it may already exist"
 
-echo "Starting application..."
-export PORT=3000
+echo "Starting application on port ${PORT:-3000}..."
+export PORT=${PORT:-3000}
 exec node server.js

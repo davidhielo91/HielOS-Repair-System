@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrderById, saveOrder, deleteOrder } from "@/lib/storage";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,

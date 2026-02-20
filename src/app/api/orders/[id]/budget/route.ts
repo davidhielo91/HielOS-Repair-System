@@ -3,6 +3,7 @@ import { getOrderById, saveOrder } from "@/lib/storage";
 import { verifyClientToken } from "@/lib/client-token";
 import { createNotification } from "@/lib/notifications";
 import { OrderStatus } from "@/types/order";
+export const dynamic = "force-dynamic";
 
 export async function POST(
   request: NextRequest,

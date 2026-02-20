@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrderByNumber } from "@/lib/storage";
 import { generateClientToken } from "@/lib/client-token";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {

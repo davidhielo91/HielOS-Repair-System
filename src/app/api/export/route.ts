@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrders, getSettings, getParts, getServices, getCategories } from "@/lib/storage";
 import { STATUS_CONFIG } from "@/types/order";
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   const format = request.nextUrl.searchParams.get("format") || "csv";

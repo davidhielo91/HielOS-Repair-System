@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getOrderByNumber, searchOrdersByPhone } from "@/lib/storage";
 import { ServiceOrder } from "@/types/order";
+export const dynamic = "force-dynamic";
 
 function publicOrderData(order: ServiceOrder) {
   return {

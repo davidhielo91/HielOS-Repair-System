@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getNotifications, markAllAsRead } from "@/lib/notifications";
 import { cookies } from "next/headers";
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
     const cookieStore = cookies();
     const adminSession = cookieStore.get("str_admin_session");
-    
+
     if (!adminSession) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
   try {
     const cookieStore = cookies();
     const adminSession = cookieStore.get("str_admin_session");
-    
+
     if (!adminSession) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }

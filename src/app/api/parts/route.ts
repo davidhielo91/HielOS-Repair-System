@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getParts, savePart, Part } from "@/lib/storage";
 import { v4 as uuidv4 } from "uuid";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
