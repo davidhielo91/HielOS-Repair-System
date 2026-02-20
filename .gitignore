@@ -11,4 +11,8 @@ next-env.d.ts
 # MCP Configuration
 .vscode/mcp-servers.json
 
+
 /src/generated/prisma
+
+# Logs
+*.log

@@ -13,12 +13,12 @@ Sistema profesional para talleres de reparación con **innovador portal de clien
 - **Notificaciones WhatsApp**: Enlace automático al portal del cliente
 
 ### 🛠 Gestión Completa
-- **Órdenes de servicio**: Crear, editar, cambiar estado, imprimir recibos
+- **Órdenes de servicio**: Crear, editar, cambiar estado (con botón rápido "Listo para Entrega"), imprimir recibos
 - **Inventario de partes**: Control de stock con alertas de bajo inventario
 - **Servicios**: Catálogo de servicios con precios y asignación de partes
 - **Reportes**: Estadísticas de órdenes, ganancias y costos
 - **Centro de notificaciones**: Alertas al admin cuando un cliente aprueba o rechaza presupuesto
-- **Respaldos**: Exportación en CSV (Excel) y JSON completo
+- **Respaldos**: Exportación en CSV (Excel) y ZIP completo (DB + Config)
 
 ### 📱 Experiencia Cliente
 - **Consulta pública**: Los clientes buscan su orden desde la página principal
@@ -29,12 +29,13 @@ Sistema profesional para talleres de reparación con **innovador portal de clien
 
 ### 🔧 Herramientas Administrativas
 - **Firma digital**: Captura de firma al recibir el equipo y al aprobar presupuesto
+- **Botones de acción rápida**: Cambiar a "Listo para Entrega" con un clic desde el detalle de orden
 - **Notificaciones WhatsApp**: Mensajes automáticos personalizados
 - **Personalización**: Logo, colores, horarios, plantillas
 - **Multi-dispositivo**: Responsive 100% para móviles y escritorio
 
 ### ⚡ Rendimiento y UX
-- **Cache en memoria**: Lecturas más rápidas para órdenes, servicios, inventario y configuración
+- **Velocidad nativa**: Optimizado con Next.js y base de datos relacional para respuestas instantáneas
 - **Menos polling**: Menor carga en notificaciones sin perder seguimiento
 - **Ajustes móviles**: Mejoras de layout y espaciado en vistas críticas (admin y portal cliente)
 
@@ -123,14 +124,14 @@ Ve a **Admin → Configuración** para personalizar:
 En **Admin → Configuración → Respaldo de Información**:
 
 - **CSV**: Exporta órdenes para Excel
-- **JSON**: Backup completo (órdenes + configuración + inventario)
+- **ZIP**: Backup completo descargable desde el panel (DB + Configuración)
 
 ## 🏗️ Arquitectura Técnica
 
 ### Stack
 - **Frontend**: Next.js 14 App Router + TypeScript
 - **Estilos**: TailwindCSS
-- **Base de datos**: JSON local (file-based)
+- **Base de datos**: SQLite (Local en `/data/taller.db`) con Prisma ORM
 - **Autenticación**: Tokens JWT con HMAC-SHA256
 - **Deployment**: Docker con `output: standalone`
 
@@ -151,7 +152,7 @@ En **Admin → Configuración → Respaldo de Información**:
 │   ├── components/          # Componentes UI
 │   ├── lib/                # Lógica de negocio
 │   └── types/              # Tipos TypeScript
-├── data/                   # Datos locales (no sube a Git)
+├── data/                   # Base de datos SQLite y archivos locales
 ├── Dockerfile             # Configuración Docker
 └── next.config.js         # Configuración Next.js
 ```
@@ -176,7 +177,7 @@ docker run -p 3000:3000 -v $(pwd)/data:/app/data sistema-taller
 - 🔔 **Integración mejorada con WhatsApp**
 - 🛡️ **Verificación telefónica mejorada**
 - 📊 **UI/UX optimizada para móviles**
-- ⚡ **Mejoras de rendimiento con cache y optimización de consultas**
+- ⚡ **Mejoras de rendimiento con SQLite y Prisma**
 
 ## 🤝 Contribuciones
 
