@@ -7,4 +7,5 @@ npx prisma migrate deploy --schema=./prisma/schema.prisma 2>/dev/null || \
   echo "Warning: Could not run migrations, database may already be up to date"
 
 echo "Starting application..."
+export PORT=3000
 exec node server.js
