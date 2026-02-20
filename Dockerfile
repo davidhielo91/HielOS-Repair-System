@@ -1,5 +1,8 @@
 FROM node:18-alpine AS base
 
+# Install OpenSSL for Prisma compatibility
+RUN apk add --no-cache openssl
+
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
@@ -28,12 +31,17 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma/
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/start.sh ./start.sh
 
 # Create data directory with proper permissions
 RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
+RUN chmod +x /app/start.sh
 
 USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["/bin/sh", "/app/start.sh"]
