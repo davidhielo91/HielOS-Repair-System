@@ -106,7 +106,7 @@ docker run -d \
 
 1. **Crea un servicio nuevo** → Selecciona **"App"** → **"GitHub"**
 2. **Conecta tu repo**: `davidhielo91/HielOS-Repair-System`
-3. **Branch**: `master`
+3. **Branch**: `main`
 4. **Build method**: `Dockerfile` (ya incluido en el repo)
 5. **Configura el dominio**: Puerto **3000**
 6. **Variables de entorno** (en la pestaña Environment):
