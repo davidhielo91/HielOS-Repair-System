@@ -1,7 +1,16 @@
-# 🚀 HielOS Repair System v2.0 - Portal de Cliente sin Contraseñas
+# 🚀 HielOS Repair System v2.0
+> **Portal de Gestión Profesional para Talleres con Sistema de Cliente sin Contraseñas.**
 
-Sistema profesional para talleres de reparación con **innovador portal de cliente seguro sin contraseñas**. Permite gestionar órdenes, inventario, y que los clientes aprueben presupuestos desde su celular.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+Sistema profesional diseñado para optimizar el flujo de trabajo en talleres de reparación. Su principal innovación es un **portal de cliente seguro y simplificado** que elimina la fricción de las contraseñas, permitiendo a los clientes seguir sus órdenes, ver fotos de evidencia y aprobar presupuestos directamente desde su móvil.
+
+---
 ## ✨ Características Principales
 
 ### 🔐 Portal de Cliente (Novedad v2.0)
@@ -198,7 +207,7 @@ En **Admin → Configuración → Respaldo de Información**:
 
 ## 📄 Licencia
 
-Este proyecto es **Open Source**. Puedes usarlo, modificarlo y distribuirlo libremente.
+Este proyecto está bajo la **Licencia MIT**. Puedes usarlo, modificarlo y distribuirlo libremente, tanto para uso personal como comercial. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ## 📞 Soporte
 
