@@ -1,4 +1,4 @@
-# 🚀 Sistema de Taller 2.0 - Portal de Cliente sin Contraseñas
+# 🚀 HielOS Repair System v2.0 - Portal de Cliente sin Contraseñas
 
 Sistema profesional para talleres de reparación con **innovador portal de cliente seguro sin contraseñas**. Permite gestionar órdenes, inventario, y que los clientes aprueben presupuestos desde su celular.
 
@@ -43,8 +43,8 @@ Sistema profesional para talleres de reparación con **innovador portal de clien
 
 ### 1. Clona el repositorio
 ```bash
-git clone https://github.com/davidhielo91/sistema-de-taller.git
-cd sistema-de-taller
+git clone https://github.com/davidhielo91/HielOS-Repair-System.git
+cd HielOS-Repair-System
 ```
 
 ### 2. Instala dependencias
@@ -105,7 +105,7 @@ docker run -d \
 ## ☁️ Despliegue en Easypanel
 
 1. **Crea un servicio nuevo** → Selecciona **"App"** → **"GitHub"**
-2. **Conecta tu repo**: `davidhielo91/sistema-de-taller`
+2. **Conecta tu repo**: `davidhielo91/HielOS-Repair-System`
 3. **Branch**: `master`
 4. **Build method**: `Dockerfile` (ya incluido en el repo)
 5. **Configura el dominio**: Puerto **3000**
@@ -211,4 +211,4 @@ Este proyecto es **Open Source**. Puedes usarlo, modificarlo y distribuirlo libr
 
 **⭐ Si te gusta el proyecto, ¡dale una estrella en GitHub!**
 
-🔗 **Repositorio**: https://github.com/davidhielo91/sistema-de-taller
+🔗 **Repositorio**: https://github.com/davidhielo91/HielOS-Repair-System
